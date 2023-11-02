@@ -54,14 +54,12 @@ class CvTester():
  
         models = os.listdir('./02 Results/test_results')
         models = [i for i in models if i.__contains__("VIT")]
-        models = ["BasicVIT16-12-16_31__1029_042613997500"]
         pbar = tqdm(models,disable=self.silent)
         for model in pbar:
             model_id =f'{model.split("_")[-2]}_{model.split("_")[-1]}'
             if not createDf:
                 if model_id in df.index.get_level_values(0):
-                    # continue         
-                    pass
+                    continue         
             path = f"./03 Reports/mean_attention_maps/{model}"
             os.makedirs(path,exist_ok=True)
             folds = [i for i in os.listdir(f'./02 Results/test_results/{model}')]
@@ -104,10 +102,12 @@ class CvTester():
             df2.drop(columns=df2.columns[:11],inplace=True)
             df2.index = multiindex
             if createDf:
-                df2.to_excel("./03 Reports/Summary.xlsx")
+                createDf=False
+                df = df2
+                # df2.to_excel("./03 Reports/Summary.xlsx")
             else:
                 df = pd.concat([df,df2],ignore_index=False)
-                df.to_excel("./03 Reports/Summary.xlsx")
+                # df.to_excel("./03 Reports/Summary.xlsx")
                 pbar.set_description("Report out.")
             pbar.set_description("Plotting")
             for i in range(10):
@@ -144,7 +144,7 @@ class CvTester():
                     fig.show()
                 plt.close()
                 
-                
+        df.to_excel("./03 Reports/Summary.xlsx")
                 # 
                 # 'ModelId','ModelType','PatchSize','Layers','Heads','Tooth','CLAHE','RandomAffine','Fold','AverageAttentionsPath','Accuracy','CohenKappa','MAE','MSE'
                 
