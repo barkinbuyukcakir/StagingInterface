@@ -1,13 +1,19 @@
 .app-header {
     font-family: sans-serif;
+    top:0px;
     height: 60px;
+    width: 100%;
     line-height: 60px;
+    background-color: white;
     border-bottom: thin lightgrey solid;
+    z-index: 1;
+    position: fixed;
 }
 
 .app-header .app-header--title {
     font-size: 22px;
     padding-left: 5px;
+
 }
 
 
@@ -15,8 +21,7 @@
     height: 100%; /* Full-height: remove this if you want "auto" height */
     width: 160px; /* Set the width of the sidebar */
     position: fixed; /* Fixed Sidebar (stay in place on scroll) */
-    z-index: 1; /* Stay on top */
-    top: 68px; /* Stay at the top */
+    top: 60px; /* Stay at the top */
     left: 0;
     background-color: rgb(36, 40, 75); 
     overflow-x: hidden; /* Disable horizontal scroll */
@@ -25,7 +30,6 @@
 .sidenav-float {
     width: 130px;
     position: fixed;
-    z-index: 1;
     top: 20px;
     left: 10px;
     background: #eee;
@@ -48,6 +52,6 @@
   /* Style page content */
   .main {
     margin-left: 160px; /* Same as the width of the sidebar */
-    padding: 0px 10px;
+    padding: 60px 10px;
   }
   

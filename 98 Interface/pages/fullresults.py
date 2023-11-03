@@ -11,15 +11,12 @@ import os
 
 
 df = pd.read_excel("./03 Reports/Summary.xlsx",index_col=[i for i in range(11)])
-df = df.reset_index(level=[i for i in range(11)])
-#Simplify Table
-df = df.loc[[df[df.ModelId == n].index[0] for n in df.ModelId.unique()],df.columns[:9]]
-df[["MeanAccStd","MeanStd"]]=df.MeanAccStd.str.split(" ",expand=True)
-df = df.rename(columns = {"MeanAccStd":"MeanAcc"})
+dff = df.reset_index(level=[i for i in range(11)])
+dff.drop(columns=["AverageAttentionsPath"],inplace=True)
 dash.register_page(__name__,
-                   path = "/results",
-                   title="Results",
-                   name="Results")
+                   path = "/results/fullresults",
+                   title="Full Results",
+                   name="Full Results")
 import numpy as np
 
 def multiindex_table(df):
@@ -54,31 +51,13 @@ def multiindex_table(df):
 layout = html.Div([
     html.H1("Table of Results"),
     html.Div(children=[
-        html.Div(
-        """This is a simplified view of the experiment results.\n
-        You can access the full results table by clicking the button below.
-        """),
-        html.A(
-            html.Button("Go to Full Results"),
-            id='toFullResults',
-            href="/results/fullresults"
-        ),
-        html.Div([
-            """To go to the attention map of analysis of the model, click the model name in the table:""",
-        ]),
-        html.Div(children=[
-            #TODO: Add filtering option
-            dash.dash_table.DataTable(data = df.to_dict(orient="records"),
-                                      style_cell={
-                                          'textAlign':'left'
-                                      },
-                                      style_data={
-                                          'whiteSpace':'normal'
-                                      },
-                                      sort_action='native')
-                                      
-        ])
-
+        """You can access all results on this page. """,
+        html.Iframe(src="https://kuleuven-my.sharepoint.com/personal/barkin_buyukcakir_kuleuven_be/_layouts/15/Doc.aspx?sourcedoc={4b1b03ec-8eca-4399-bc4f-ccec8030c312}&action=embedview&wdHideHeaders=True&wdInConfigurator=True&wdInConfigurator=True",
+        style={
+            "height":'700px',
+            "width":"80%",
+        }
+        )
         ]   
         )
 ]

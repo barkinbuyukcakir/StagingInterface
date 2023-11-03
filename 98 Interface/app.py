@@ -21,7 +21,7 @@ app.layout = html.Div([
                 html.Div("Dental Staging with VIT",className="app-header--title")
             ],className="app-header"),
     html.Div(children=[
-        html.A(f"{page['name']}", href=page["relative_path"],className="sidenav--a") for page in dash.page_registry.values()
+        html.A(f"{page['name']}", href=page["relative_path"],className="sidenav--a") for page in dash.page_registry.values() if page["name"] != "Full Results"
     ],
     className="sidenav"),
     html.Div(children=[
