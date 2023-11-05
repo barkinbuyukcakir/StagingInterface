@@ -3,10 +3,12 @@
 #There will also be a figure that will allow users to select any single test samplw to display, along with the attention map of it.
 
 import dash
-from dash import Dash, html, dcc
+from dash import Dash, html, dcc, clientside_callback, Input, Output, callback,State
 import plotly.express as px
 import pandas as pd
 import os
+from dash.exceptions import PreventUpdate
+import dash_ag_grid as dag
 
 
 
@@ -22,36 +24,26 @@ dash.register_page(__name__,
                    name="Results")
 import numpy as np
 
-def multiindex_table(df):
-    # storing rowSpan values for every cell of index;
-    # if rowSpan==0, html item is not going to be included
-    pos = np.diff(df.index.codes, axis=1, prepend=-1)
-    for row in pos:
-        counts = np.diff(np.flatnonzero(np.r_[row, 1]))
-        row[row.astype(bool)] = counts
 
-    # filling up header of table;
-    column_names = df.columns.values
-    headTrs = html.Tr([html.Th(n) for n in df.index.names] +
-                      [html.Th(n) for n in column_names])
-    # filling up rows of table;
-    bodyTrs = []
-    for rowSpanVals, idx, col in zip(pos.T, df.index.tolist(), df.to_numpy()):
-        rowTds = []
-        for name, rowSpan in zip(idx, rowSpanVals):
-            if rowSpan != 0:
-                rowTds.append(html.Td(name, rowSpan=rowSpan))
-        for name in col:
-            rowTds.append(html.Td(name))
-        bodyTrs.append(html.Tr(rowTds))
-
-    table = html.Table([
-        html.Thead(headTrs),
-        html.Tbody(bodyTrs)
-    ])
-    return table
+coldef0 = [
+        {"headerName": "ModelId",
+         "field":"ModelId",
+         "cellRenderer":"StockLink"},
+         
+    ]
+coldefrest = [
+    {"field": i,'sortable': True} for i in df.columns[1:]
+]
+grid = dag.AgGrid(
+    columnDefs=coldef0+coldefrest,
+    rowData=df.to_dict('records'),
+    columnSize='sizeToFit',
+    id='resTable'
+)
 
 layout = html.Div([
+    dcc.Store(id="linkStore",data=None),
+    dcc.Store(id="dummy"),
     html.H1("Table of Results"),
     html.Div(children=[
         html.Div(
@@ -68,14 +60,21 @@ layout = html.Div([
         ]),
         html.Div(children=[
             #TODO: Add filtering option
-            dash.dash_table.DataTable(data = df.to_dict(orient="records"),
-                                      style_cell={
-                                          'textAlign':'left'
-                                      },
-                                      style_data={
-                                          'whiteSpace':'normal'
-                                      },
-                                      sort_action='native')
+            grid
+            # dash.dash_table.DataTable(
+            #     columns=[
+            #         {'name':i,'id':i,"deletable":False} for i in df.columns if i!="id"
+            #     ],
+            #     data = df.to_dict(orient="records"),
+            #                           style_cell={
+            #                               'textAlign':'left'
+            #                           },
+            #                           style_data={
+            #                               'whiteSpace':'normal'
+            #                           },
+            #                           sort_action='native',
+            #                           sort_mode="multi",
+            #                           id="resTable")
                                       
         ])
 
@@ -84,7 +83,36 @@ layout = html.Div([
 ]
 )
 
-"""
-<iframe width="700" height="400" frameborder="0" scrolling="no" src="https://kuleuven-my.sharepoint.com/personal/barkin_buyukcakir_kuleuven_be/_layouts/15/Doc.aspx?sourcedoc={4b1b03ec-8eca-4399-bc4f-ccec8030c312}&action=embedview&Item='Sheet1'!A%3AO&wdHideGridlines=True&wdDownloadButton=True&wdInConfigurator=True&wdInConfigurator=True"></iframe>
-<iframe width="402" height="346" frameborder="0" scrolling="no" src="https://kuleuven-my.sharepoint.com/personal/barkin_buyukcakir_kuleuven_be/_layouts/15/Doc.aspx?sourcedoc={4b1b03ec-8eca-4399-bc4f-ccec8030c312}&action=embedview&wdHideHeaders=True&wdInConfigurator=True&wdInConfigurator=True"></iframe>
-"""
+# @callback(
+#         Output('modelStore','data'),
+#         Output("linkStore",'data'),
+#         Input("resTable",'active_cell'),
+#         Input("resTable",'derived_virtual_row_ids'),
+#         Input("resTable",'selected_row_ids')
+# )
+# def update_link(active_cell,row_ids,selected_row_ids):
+#     if row_ids is None:
+#         dff = df
+#         row_ids = df["id"]
+#     else:
+#         dff = df.loc[row_ids]
+#     if active_cell is None:
+#         raise PreventUpdate
+#     if not active_cell["column_id"]=='ModelId':
+#         return PreventUpdate
+#     return df.loc[active_cell["row"],active_cell["column_id"]],"/attention_maps"
+
+
+
+# clientside_callback(
+#     """
+#     function(link){
+#         const cur_host = window.location.host
+#         window.location.pathname = '/' + link
+#         return 0;
+#     }
+#     """,
+#     Output("dummy","data"),
+#     Input("linkStore",'data')
+# )
+

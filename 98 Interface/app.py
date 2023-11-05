@@ -17,6 +17,7 @@ app = Dash(__name__, use_pages=True)
 #     dash.page_container
 # ],className="sidenav")
 app.layout = html.Div([
+    dcc.Store(id="modelStore",storage_type="session",data=None),
     html.Div(children = [
                 html.Div("Dental Staging with VIT",className="app-header--title")
             ],className="app-header"),
