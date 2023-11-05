@@ -3,9 +3,12 @@
 #There will also be a figure that will allow users to select any single test sample to display, along with the attention map of it.
 
 import dash
-from dash import Dash, html, dcc
+from dash import Dash, html, dcc, callback, Input, Output
 import plotly.express as px
-from skimage import io
+from plotly.subplots import make_subplots
+from PIL import Image
+import numpy as np
+import pandas as pd
 
 
 dash.register_page(__name__,
@@ -13,8 +16,22 @@ dash.register_page(__name__,
                    title="Attention Maps",
                    name="Attention Maps")
 
+df =  pd.read_excel('03 Reports/Summary.xlsx')
+df = df.dropna()
+models = df.iloc[:,0].dropna().unique()
+
 def get_image(model,stage):
-    im = io.imread("")
+    "Recursively look for image at stage"
+    folder = df[df.iloc[:,0] == model].AverageAttentionsPath.values[0]
+    try:
+        att_im = np.array(Image.open(folder+f"/stage_{stage}_atMean.png").resize((300,300)).convert("RGB"))
+        mean_im = np.array(Image.open(folder+f"/stage_{stage}_imMean.png").resize((300,300)).convert("RGB"))
+        not_found= False
+    except FileNotFoundError:
+        not_found=True
+        stage +=1
+        att_im,mean_im,stage= get_image(model,stage)
+    return att_im,mean_im,stage
 
 def average_images(current_stage):
     cur_stage = int(current_stage)
@@ -27,5 +44,43 @@ layout = html.Div([
     html.H1("Here be Attention Maps"),
     html.Div(children=["This is the attention maps page. We display mean attention maps here, sir!",
         html.Div("There will be as")]
+    ),
+    html.Div([
+        dcc.Dropdown([m for m in models],id = "curModel",value=models[0]),
+        dcc.Graph(id="att_map")]),
+    html.Div(
+        dcc.Slider(min=0,max=9,marks={i: f"Stage {i}" for i in range(10)}, value=0,id = 'stageSlider')
     )
 ])
+
+
+def updateSliderStyle():
+    pass
+
+@callback(
+    Output("att_map",'figure'),
+    Output("stageSlider",'min'),
+    Input("stageSlider",'value'),
+    Input("curModel","value"),
+    Input("stageSlider",'min')
+)
+def update_figure(stage,model,slider_min):
+
+    if stage-int(stage) == 0:
+        att_im,mean_im,found_stage = get_image(model,stage)
+        figures = [
+            px.imshow(mean_im),
+            px.imshow(att_im)
+        ]
+        fig = make_subplots(rows=1,cols=len(figures))
+        for i,figure in enumerate(figures):
+            for trace in range(len(figure["data"])):
+                fig.append_trace(figure["data"][trace],row=1,col=i+1)
+        if not found_stage==stage:
+            return fig,found_stage
+        else:
+            return fig,slider_min
+
+    else:
+        pass
+
