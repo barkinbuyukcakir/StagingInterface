@@ -31,9 +31,13 @@ coldef0 = [
          "cellRenderer":"StockLink"},
          
     ]
-coldefrest = [
-    {"field": i,'sortable': True} for i in df.columns[1:]
-]
+coldefrest = []
+for i in df.columns[1:]:
+    if i not in ["CLAHE","RandomAffine"]:
+        coldefrest.append({"field": i,'sortable': True,'filter':'agNumberColumnFilter'})
+    else:
+        coldefrest.append({"field": i,'sortable': True,'filter':'agTextColumnFilter'})
+
 grid = dag.AgGrid(
     columnDefs=coldef0+coldefrest,
     rowData=df.to_dict('records'),
@@ -56,7 +60,14 @@ layout = html.Div([
             href="/results/fullresults"
         ),
         html.Div([
-            """To go to the attention map of analysis of the model, click the model name in the table:""",
+            dcc.Markdown(
+                '''
+            To go to the attention map analysis of a model, click the model name in the table.
+
+            You can sort the values in the table by clicking the column names. Hold `Shift` for multi-sorting. You can also filter results using the menu next to each column name.
+            '''
+            )
+            ,
         ]),
         html.Div(children=[
             #TODO: Add filtering option
