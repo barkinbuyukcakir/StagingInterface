@@ -53,7 +53,7 @@ class CvTester():
 
  
         models = os.listdir('./02 Results/test_results')
-        models = [i for i in models if i.__contains__("VIT")]
+        models = [i for i in models if i.__contains__("1106")]
         pbar = tqdm(models,disable=self.silent)
         for model in pbar:
             model_id =f'{model.split("_")[-2]}_{model.split("_")[-1]}'

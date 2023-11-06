@@ -43,11 +43,11 @@ class DistillViT(nn.Module):
             emb_dropout = 0.1
         )
 
-        self.v = Recorder(self.v)
-        t = nn.Sequential([
+        # self.v = Recorder(self.v)
+        t = nn.Sequential(
             densenet201(pretrained = True),
             nn.Linear(1000,10)
-        ])
+        )
 
         self.distiller = distill.DistillWrapper(
             student=self.v,
@@ -57,6 +57,8 @@ class DistillViT(nn.Module):
             hard = False
         )
 
+    def forward(self,x,l):
+        return self.distiller(x,l)
 
 class BasicViT(nn.Module):
     def __init__(self,image_size:int | tuple = 224, patch_size: int = 32, num_classes:int = 10 ,depth:int = 12, head_num:int = 16,channels:int =1) -> None:
@@ -65,7 +67,7 @@ class BasicViT(nn.Module):
             image_size = image_size,
             patch_size = patch_size,
             num_classes = num_classes,
-            dim = 1024,
+            dim = 512,
             depth = depth,
             heads = head_num,
             mlp_dim = 512,
@@ -177,10 +179,10 @@ class CrossValidator():
             os.makedirs(f"./02 Results/test_results/{self.SIGNIFIER}",exist_ok=True)
             cl,ts = clahe_params(self.TOOTH)
             #Only apply RandomAffine for training
-            train_set = CustomDatasetStaging(train_df,transform=transform,per_image_norm = False,clahe=clahe,clip_limit = cl, tile_size = (ts,ts))
+            train_set = CustomDatasetStaging(train_df,transform=transform,per_image_norm = False,clahe=clahe,clip_limit = cl, tile_size = (ts,ts),n_channels=3)
             transform = T.Compose([t for t in transform.transforms if not isinstance(t,T.RandomAffine)])
-            test_set = CustomDatasetStaging(test_df,transform=transform,per_image_norm = False,clahe=clahe,clip_limit = cl, tile_size = (ts,ts))
-            attention_set = CustomDatasetStaging(attention_df,transform=transform,per_image_norm = False,clahe=clahe,clip_limit = cl, tile_size = (ts,ts))
+            test_set = CustomDatasetStaging(test_df,transform=transform,per_image_norm = False,clahe=clahe,clip_limit = cl, tile_size = (ts,ts),n_channels=3)
+            attention_set = CustomDatasetStaging(attention_df,transform=transform,per_image_norm = False,clahe=clahe,clip_limit = cl, tile_size = (ts,ts),n_channels=3)
             fold_model = self.model_train(
                 train_set,
                 epochs=epochs,
@@ -238,13 +240,13 @@ class CrossValidator():
         device = torch.device(f"cuda:{gpu_id}" if use_cuda else 'cpu')
         #Load model, loss function and optimizer
         # model = ViT(patch_size=patch_size,image_size=image_size).to(device)
-        model = BasicViT(
+        model = DistillViT(
             image_size=image_size,
             patch_size=patch_size,
             num_classes=10,
             depth=self.n_layers,
             head_num=self.n_heads,
-            channels=1
+            channels=3
         ).to(device)
         loss_fn = nn.CrossEntropyLoss().to(device)
         optimizer = Adam(model.parameters(),lr=learning_rate, weight_decay=kwargs.pop('weight_decay',0))
@@ -260,31 +262,32 @@ class CrossValidator():
             train_loss = 0
             ct = 0
             for train_batch, train_labels in tqdm(train_loader,disable=self.SILENT):
-                output = model(train_batch.to(device))
-                loss = loss_fn(output[0],train_labels.to(device))
-                acc = (output[0].argmax(dim=1) == train_labels.to(device)).sum().item()/batch_size
-                train_acc += acc
+                loss = model(train_batch.to(device),train_labels.to(device))
+                # loss = loss_fn(output[0],train_labels.to(device))
+                # acc = (output[0].argmax(dim=1) == train_labels.to(device)).sum().item()/batch_size
+                # train_acc += acc
                 loss.backward()
                 train_loss += loss.item()
                 optimizer.step()
                 optimizer.zero_grad()
                 ct+=1
             if attention_set is not None:
+                pass
                 # logging.getLogger("matplotlib.image").setLevel(logging.ERROR)
-                self.intermediate_rollout(attention_set,e,model,use_cuda,gpu_id,fold,(image_size[1]//patch_size, image_size[0]//patch_size),patch_size)
+                # self.intermediate_rollout(attention_set,e,model,use_cuda,gpu_id,fold,(image_size[1]//patch_size, image_size[0]//patch_size),patch_size)
             if not self.SILENT:
                 print(f"FOLD {fold} | Epoch {e+1} | Loss: {(train_loss/ct):.3f} | Accuracy: {(train_acc/ct):.3f} ")
             if test_set is not None:
                     pass
-                    with torch.no_grad():
-                        _= self.model_test(
-                            test_set,
-                            trained_model=model,
-                            gpu_id = gpu_id,
-                            gather_attentions=False,
-                            batch_size=1,
-                            training=True
-                        )
+                    # with torch.no_grad():
+                    #     _= self.model_test(
+                    #         test_set,
+                    #         trained_model=model,
+                    #         gpu_id = gpu_id,
+                    #         gather_attentions=False,
+                    #         batch_size=1,
+                    #         training=True
+                    #     )
         return model
 
     @torch.no_grad()
@@ -353,7 +356,7 @@ class CrossValidator():
             st_dict = torch.load(trained_model)
             model.load_state_dict(state_dict=st_dict)
         else:
-            model = trained_model.to(device)
+            model = Recorder(trained_model.v.to_vit().to(device))
         loss_fn = nn.CrossEntropyLoss().to(device)
         test_loader = DataLoader(
             dataset = dataset,

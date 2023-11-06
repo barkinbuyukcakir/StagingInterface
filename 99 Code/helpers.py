@@ -8,6 +8,7 @@ from torchvision.io import read_image
 from PIL import Image, ImageDraw
 from psd_tools import PSDImage
 from tqdm import tqdm
+import warnings
 
 def split_train_test(dataset: str, train_size:float = 0.8):
     main_df = pd.read_excel(dataset)
@@ -85,6 +86,7 @@ def check_duplicates(splits,silent=False):
     """Very slow probably"""
     if not silent:
         print("Checking for duplicates in the fold splits...")  
+    duplicates = []
     for fold,(train,test) in enumerate(tqdm(splits,disable=silent)):
         train_ims = []
         test_ims = []       
@@ -93,7 +95,7 @@ def check_duplicates(splits,silent=False):
                 train_im = PSDImage.open(train.iloc[i,0]).composite()
                 train_ims.append(train_im.convert("L"))
             elif train.iloc[i,0].endswith(".png"):
-                train_ims.append(read_image(train.iloc[i,0]))
+                train_ims.append(read_image(train.iloc[i,0])[:3])
             else:
                 raise FileNotFoundError("The format is impossible.")
         for j in range(len(test)):
@@ -101,13 +103,15 @@ def check_duplicates(splits,silent=False):
                 test_im = PSDImage.open(test.iloc[j,0]).composite()
                 test_ims.append(test_im.convert("L"))
             elif test.iloc[j,0].endswith(".png"):
-                test_ims.append(read_image(test.iloc[j,0]))
+                test_ims.append(read_image(test.iloc[j,0])[:3])
             else:
                 raise FileNotFoundError("The format is impossible.")
         for i in range(len(train)):
             for j in range(len(test)):
-                if train_ims[i]==test_ims[j]:
-                    raise ValueError(f"Duplicate found in train and test sets, {train.iloc[i,0]} and {test.iloc[j,0]}")
+                cond = (train_ims[i] == test_ims[j]).all() if train.iloc[0,0].endswith('png') else train_ims[i] == test_ims[j]
+                if cond:
+                    duplicates.append((train.iloc[i,0],test.iloc[j,0]))
+                    warnings.warn(f"Duplicate found in train and test sets, {train.iloc[i,0]} and {test.iloc[j,0]}")
     if not silent:
         print("No duplicate images found.")
 

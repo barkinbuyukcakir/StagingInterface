@@ -28,7 +28,7 @@ if __name__ == "__main__":
     args = parser.parse_args()
     
     procs = []    
-    teeth = [31,33,34,37]
+    teeth = [38]
     patch_sizes = [16,32]
     aug_clahe = (False,True)
     aug_ra = (False,True)
@@ -38,22 +38,23 @@ if __name__ == "__main__":
         for ps in patch_sizes:
             for tooth in teeth:
                 for clahe in aug_clahe:
-                    for ra in aug_ra:
-                        args_cv = (tooth,gpu_track,80,clahe,ra,ps,True,)
-                        ct+=1
-                        p = mp.Process(target = cross_validate,args=args_cv)
-                        limit = 0 if ps ==32 else 0
-                        if ct>limit:
-                            gpu_track+=1
-                            ct=0
-                        procs.append(p)            
-                        p.start()
+                    for epochs in [60,80]:
+                        for ra in aug_ra:
+                            args_cv = (tooth,gpu_track,epochs,clahe,ra,ps,True,)
+                            ct+=1
+                            p = mp.Process(target = cross_validate,args=args_cv)
+                            limit = 0 if ps ==32 else 0
+                            if ct>limit:
+                                gpu_track+=1
+                                ct=0
+                            procs.append(p)            
+                            p.start()
 
-                        if gpu_track>4:
-                            print("Waiting for free gpus")
-                            gpu_track=0
-                            for proc in procs:
-                                proc.join()
+                            if gpu_track>4:
+                                print("Waiting for free gpus")
+                                gpu_track=0
+                                for proc in procs:
+                                    proc.join()
 
         for p in procs:
             p.join()

@@ -23,6 +23,7 @@ class CustomDatasetStaging(Dataset):
         self.per_image_norm = kwargs.pop("per_image_norm",False)
         self.transform = transform
         self.patch_size = patch_size
+        self.n_channels = kwargs.pop("n_channels",1)
 
     def __len__(self):
         return len(self.annot)
@@ -54,6 +55,7 @@ class CustomDatasetStaging(Dataset):
             image = read_image(img_path)[:3]
             if self.do_clahe:
                 image = self.doClahe(image.permute(1,2,0)[:,:,0].to(uint8).numpy())
+            image = image/255
         img_label = self.annot.iloc[index,-2]
         if image.shape[0] == 1:
             image = vstack((image,image,image))
@@ -61,7 +63,10 @@ class CustomDatasetStaging(Dataset):
             image = self.transform(image)
         if self.per_image_norm:
             image = self.__perImageNorm(image)
-        return image, int(img_label)
+        if self.n_channels ==3:
+            return vstack([image,image,image]), int(img_label)
+        else:
+            return image, int(img_label)
     
 
 if __name__ == "__main__":

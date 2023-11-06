@@ -5,6 +5,6 @@ import shutil
 roots= ['./02 Results/training_attentions','./02 Results/test_results','./02 Results/models']
 
 for root in roots:
-    folders = [i for i in os.listdir(root) if i.__contains__('VIT')]
+    folders = [i for i in os.listdir(root) if i.__contains__('1106')]
     for folder in folders:
         shutil.rmtree(root+"/"+folder)
