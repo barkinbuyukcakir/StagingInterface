@@ -1,5 +1,5 @@
 # StagingInterface
-The interface for staging with ViT results.
+The interface for ViT Staging results.
 
 ## Setup
 
