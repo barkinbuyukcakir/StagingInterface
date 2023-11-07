@@ -28,21 +28,22 @@ import numpy as np
 coldef0 = [
         {"headerName": "ModelId",
          "field":"ModelId",
-         "cellRenderer":"StockLink"},
+         "cellRenderer":"StockLink"
+         },
          
     ]
 coldefrest = []
 for i in df.columns[1:]:
     if i not in ["CLAHE","RandomAffine"]:
-        coldefrest.append({"field": i,'sortable': True,'filter':'agNumberColumnFilter'})
+        coldefrest.append({"field": i,'sortable': True,'filter':'agNumberColumnFilter','resizable':True},)
     else:
-        coldefrest.append({"field": i,'sortable': True,'filter':'agTextColumnFilter'})
+        coldefrest.append({"field": i,'sortable': True,'filter':'agTextColumnFilter','resizable':True})
 
 grid = dag.AgGrid(
     columnDefs=coldef0+coldefrest,
     rowData=df.to_dict('records'),
-    columnSize='sizeToFit',
-    id='resTable'
+    columnSize='autoSize',
+    id='resTable',
 )
 
 layout = html.Div([

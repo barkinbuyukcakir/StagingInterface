@@ -13,7 +13,7 @@ mean_attentions =dict([(str(i),[]) for i in range(10)])
 wmean_attentions = dict([(str(i),[]) for i in range(10)])
 for root,dirs,files in os.walk('./03 Reports/mean_attention_maps'):
     for name in files:
-        if root.__contains__("VIT"):
+        if root.__contains__("VIT16"):
             stage = name.split("_")[1]
             if name.split("_")[-1].startswith("wMean"):
                 wmean_attentions[stage] += [os.path.join(root,name)]
@@ -59,7 +59,7 @@ for target in targets:
                , pc_values.loc[indicesToKeep, 'PC2'],c=c, s = 40)
 
 plt.legend(targets,prop={'size': 10})
-plt.savefig("./03 Reports/PC1vsPC2.png")
+plt.savefig("./03 Reports/PC1vsPC2_16.png")
 plt.close("all")
 plt.figure(figsize=(10,10))
 plt.xticks(fontsize=12)
@@ -80,6 +80,6 @@ for target in targets:
                , pc_values.loc[indicesToKeep, 'PC4'], c=c, s = 40)
 
 plt.legend(targets,prop={'size': 10})
-plt.savefig("./03 Reports/PC3vsPC4.png")
+plt.savefig("./03 Reports/PC3vsPC4_16.png")
 
 plt.close("all")
