@@ -38,12 +38,15 @@ if __name__ == "__main__":
         for ps in patch_sizes:
             for tooth in teeth:
                 for clahe in aug_clahe:
-                    for epochs in [60,80]:
+                    for epochs in [60]:
                         for ra in aug_ra:
+                            if gpu_track==3:
+                                gpu_track+=1
+                                continue
                             args_cv = (tooth,gpu_track,epochs,clahe,ra,ps,True,)
                             ct+=1
                             p = mp.Process(target = cross_validate,args=args_cv)
-                            limit = 0 if ps ==32 else 0
+                            limit = 0 if ps == 32 else 0
                             if ct>limit:
                                 gpu_track+=1
                                 ct=0

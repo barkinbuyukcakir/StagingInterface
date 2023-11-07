@@ -50,9 +50,9 @@ def layout(model_id=models[0],**qstrings):
         html.H1("Attention Maps"),
         html.Div(children=[
             dcc.Markdown('''
-                         Below you can see the mean image, the mean attention map and the accuracy weighted mean attention map of each stage for the selected model. The averaging is done across folds.
+                         Below you can see the mean image, the mean attention map and the MAE-weighted mean attention map of each stage for the selected model. The averaging is done across folds.
 
-                         The accuracy weighted mean is calculated such that the attention maps of predictions closer to their actual label contributes more to the mean.
+                         The MAE-weighted mean is calculated such that the attention maps of predictions closer to their actual label contributes more to the mean.
 
                          You may select a model from the dropdown menu or from the [Results Page](/results) for filtered inspection.
                          '''),]
@@ -116,7 +116,7 @@ def update_figure(stage,model,slider_min):
             px.imshow(att_im),
             px.imshow(w_mean)
         ]
-        fig = make_subplots(rows=1,cols=len(figures),subplot_titles = ["Mean Image of Stage", "Mean Attention Map", "Accuracy-Weighted Mean Map"])
+        fig = make_subplots(rows=1,cols=len(figures),subplot_titles = ["Mean Image of Stage", "Mean Attention Map", "MAE-Weighted Mean Map"])
         for i,figure in enumerate(figures):
             for trace in range(len(figure["data"])):
                 fig.append_trace(figure["data"][trace],row=1,col=i+1)
