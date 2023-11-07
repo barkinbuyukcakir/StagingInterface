@@ -51,11 +51,16 @@ def multiindex_table(df):
 layout = html.Div([
     html.H1("Table of Results"),
     html.Div(children=[
-        """You can access all results on this page. """,
-        html.Iframe(src="https://kuleuven-my.sharepoint.com/personal/barkin_buyukcakir_kuleuven_be/_layouts/15/Doc.aspx?sourcedoc={4b1b03ec-8eca-4399-bc4f-ccec8030c312}&action=embedview&wdHideHeaders=True&wdInConfigurator=True&wdInConfigurator=True",
+        dcc.Markdown(
+            '''
+        You can access the full results on this page. 
+        It's recommended you download the Excel file for better viewing by using the download button on the bottom right.
+'''
+        ),
+        html.Iframe(src="https://kuleuven-my.sharepoint.com/personal/barkin_buyukcakir_kuleuven_be/_layouts/15/Doc.aspx?sourcedoc={4b1b03ec-8eca-4399-bc4f-ccec8030c312}&action=embedview&Item=Table1&wdHideGridlines=True&wdDownloadButton=True&wdInConfigurator=True&wdInConfigurator=True",
         style={
             "height":'700px',
-            "width":"80%",
+            "width":"100%",
         }
         )
         ]   
@@ -64,6 +69,5 @@ layout = html.Div([
 )
 
 """
-<iframe width="700" height="400" frameborder="0" scrolling="no" src="https://kuleuven-my.sharepoint.com/personal/barkin_buyukcakir_kuleuven_be/_layouts/15/Doc.aspx?sourcedoc={4b1b03ec-8eca-4399-bc4f-ccec8030c312}&action=embedview&Item='Sheet1'!A%3AO&wdHideGridlines=True&wdDownloadButton=True&wdInConfigurator=True&wdInConfigurator=True"></iframe>
-<iframe width="402" height="346" frameborder="0" scrolling="no" src="https://kuleuven-my.sharepoint.com/personal/barkin_buyukcakir_kuleuven_be/_layouts/15/Doc.aspx?sourcedoc={4b1b03ec-8eca-4399-bc4f-ccec8030c312}&action=embedview&wdHideHeaders=True&wdInConfigurator=True&wdInConfigurator=True"></iframe>
+<iframe width="402" height="346" frameborder="0" scrolling="no" src="https://kuleuven-my.sharepoint.com/personal/barkin_buyukcakir_kuleuven_be/_layouts/15/Doc.aspx?sourcedoc={4b1b03ec-8eca-4399-bc4f-ccec8030c312}&action=embedview&Item=Table1&wdHideGridlines=True&wdDownloadButton=True&wdInConfigurator=True&wdInConfigurator=True"></iframe>
 """
