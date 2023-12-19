@@ -1,0 +1,718 @@
+Tooth 33 PS 16 | CL True RA False:
+--------------------------
+DenseNet Only:
+        MAE:            0.897
+        Cohen's Kappa:  0.382
+        Accuracy:       0.470
+
+ViT Only:
+        MAE:            0.929
+        Cohen's Kappa:  0.253
+        Accuracy:       0.359
+
+Best of Both (Majority ViT by 65.12%):
+        MAE:            0.399
+        Cohen's Kappa:  0.594
+        Accuracy:       0.651
+
+
+Tooth 38 PS 32 | CL False RA True:
+--------------------------
+DenseNet Only:
+        MAE:            1.088
+        Cohen's Kappa:  0.389
+        Accuracy:       0.450
+
+ViT Only:
+        MAE:            1.239
+        Cohen's Kappa:  0.255
+        Accuracy:       0.329
+
+Best of Both (Majority ViT by 60.80%):
+        MAE:            0.538
+        Cohen's Kappa:  0.559
+        Accuracy:       0.603
+
+
+Tooth 38 PS 32 | CL True RA True:
+--------------------------
+DenseNet Only:
+        MAE:            1.161
+        Cohen's Kappa:  0.383
+        Accuracy:       0.445
+
+ViT Only:
+        MAE:            1.216
+        Cohen's Kappa:  0.288
+        Accuracy:       0.359
+
+Best of Both (Majority ViT by 61.81%):
+        MAE:            0.482
+        Cohen's Kappa:  0.576
+        Accuracy:       0.618
+
+
+Tooth 33 PS 16 | CL False RA True:
+--------------------------
+DenseNet Only:
+        MAE:            0.616
+        Cohen's Kappa:  0.482
+        Accuracy:       0.555
+
+ViT Only:
+        MAE:            0.947
+        Cohen's Kappa:  0.249
+        Accuracy:       0.356
+
+Best of Both (Majority ViT by 57.30%):
+        MAE:            0.352
+        Cohen's Kappa:  0.614
+        Accuracy:       0.669
+
+
+Tooth 31 PS 16 | CL False RA True:
+--------------------------
+DenseNet Only:
+        MAE:            0.605
+        Cohen's Kappa:  0.498
+        Accuracy:       0.570
+
+ViT Only:
+        MAE:            0.764
+        Cohen's Kappa:  0.365
+        Accuracy:       0.461
+
+Best of Both (Majority ViT by 70.54%):
+        MAE:            0.337
+        Cohen's Kappa:  0.658
+        Accuracy:       0.709
+
+
+Tooth 37 PS 32 | CL True RA True:
+--------------------------
+DenseNet Only:
+        MAE:            0.527
+        Cohen's Kappa:  0.608
+        Accuracy:       0.648
+
+ViT Only:
+        MAE:            0.748
+        Cohen's Kappa:  0.457
+        Accuracy:       0.512
+
+Best of Both (Majority ViT by 67.61%):
+        MAE:            0.219
+        Cohen's Kappa:  0.783
+        Accuracy:       0.805
+
+
+Tooth 37 PS 16 | CL True RA True:
+--------------------------
+DenseNet Only:
+        MAE:            0.835
+        Cohen's Kappa:  0.540
+        Accuracy:       0.586
+
+ViT Only:
+        MAE:            0.725
+        Cohen's Kappa:  0.451
+        Accuracy:       0.506
+
+Best of Both (Majority ViT by 69.67%):
+        MAE:            0.267
+        Cohen's Kappa:  0.760
+        Accuracy:       0.784
+
+
+Tooth 34 PS 32 | CL True RA False:
+--------------------------
+DenseNet Only:
+        MAE:            0.906
+        Cohen's Kappa:  0.372
+        Accuracy:       0.448
+
+ViT Only:
+        MAE:            0.787
+        Cohen's Kappa:  0.373
+        Accuracy:       0.452
+
+Best of Both (Majority ViT by 72.58%):
+        MAE:            0.381
+        Cohen's Kappa:  0.613
+        Accuracy:       0.661
+
+
+Tooth 38 PS 32 | CL False RA False:
+--------------------------
+DenseNet Only:
+        MAE:            0.977
+        Cohen's Kappa:  0.386
+        Accuracy:       0.447
+
+ViT Only:
+        MAE:            1.317
+        Cohen's Kappa:  0.246
+        Accuracy:       0.322
+
+Best of Both (Majority ViT by 62.06%):
+        MAE:            0.528
+        Cohen's Kappa:  0.545
+        Accuracy:       0.590
+
+
+Tooth 34 PS 16 | CL True RA False:
+--------------------------
+DenseNet Only:
+        MAE:            0.777
+        Cohen's Kappa:  0.436
+        Accuracy:       0.503
+
+ViT Only:
+        MAE:            0.852
+        Cohen's Kappa:  0.292
+        Accuracy:       0.381
+
+Best of Both (Majority ViT by 62.58%):
+        MAE:            0.387
+        Cohen's Kappa:  0.617
+        Accuracy:       0.665
+
+
+Tooth 38 PS 16 | CL True RA False:
+--------------------------
+DenseNet Only:
+        MAE:            1.204
+        Cohen's Kappa:  0.369
+        Accuracy:       0.432
+
+ViT Only:
+        MAE:            0.995
+        Cohen's Kappa:  0.327
+        Accuracy:       0.394
+
+Best of Both (Majority ViT by 71.86%):
+        MAE:            0.523
+        Cohen's Kappa:  0.551
+        Accuracy:       0.595
+
+
+Tooth 37 PS 32 | CL True RA False:
+--------------------------
+DenseNet Only:
+        MAE:            0.972
+        Cohen's Kappa:  0.543
+        Accuracy:       0.589
+
+ViT Only:
+        MAE:            0.799
+        Cohen's Kappa:  0.456
+        Accuracy:       0.512
+
+Best of Both (Majority ViT by 67.35%):
+        MAE:            0.247
+        Cohen's Kappa:  0.768
+        Accuracy:       0.792
+
+
+Tooth 33 PS 32 | CL False RA False:
+--------------------------
+DenseNet Only:
+        MAE:            0.754
+        Cohen's Kappa:  0.336
+        Accuracy:       0.431
+
+ViT Only:
+        MAE:            0.819
+        Cohen's Kappa:  0.353
+        Accuracy:       0.445
+
+Best of Both (Majority ViT by 74.73%):
+        MAE:            0.438
+        Cohen's Kappa:  0.556
+        Accuracy:       0.619
+
+
+Tooth 38 PS 16 | CL False RA False:
+--------------------------
+DenseNet Only:
+        MAE:            0.975
+        Cohen's Kappa:  0.355
+        Accuracy:       0.420
+
+ViT Only:
+        MAE:            1.274
+        Cohen's Kappa:  0.238
+        Accuracy:       0.314
+
+Best of Both (Majority ViT by 62.06%):
+        MAE:            0.555
+        Cohen's Kappa:  0.509
+        Accuracy:       0.558
+
+
+Tooth 33 PS 16 | CL True RA True:
+--------------------------
+DenseNet Only:
+        MAE:            0.641
+        Cohen's Kappa:  0.444
+        Accuracy:       0.523
+
+ViT Only:
+        MAE:            1.018
+        Cohen's Kappa:  0.220
+        Accuracy:       0.331
+
+Best of Both (Majority ViT by 60.14%):
+        MAE:            0.413
+        Cohen's Kappa:  0.594
+        Accuracy:       0.651
+
+
+Tooth 38 PS 16 | CL False RA True:
+--------------------------
+DenseNet Only:
+        MAE:            0.867
+        Cohen's Kappa:  0.400
+        Accuracy:       0.460
+
+ViT Only:
+        MAE:            1.216
+        Cohen's Kappa:  0.269
+        Accuracy:       0.342
+
+Best of Both (Majority ViT by 65.08%):
+        MAE:            0.540
+        Cohen's Kappa:  0.537
+        Accuracy:       0.583
+
+
+Tooth 34 PS 32 | CL False RA True:
+--------------------------
+DenseNet Only:
+        MAE:            0.652
+        Cohen's Kappa:  0.438
+        Accuracy:       0.506
+
+ViT Only:
+        MAE:            0.716
+        Cohen's Kappa:  0.380
+        Accuracy:       0.458
+
+Best of Both (Majority ViT by 70.32%):
+        MAE:            0.329
+        Cohen's Kappa:  0.650
+        Accuracy:       0.694
+
+
+Tooth 37 PS 32 | CL False RA True:
+--------------------------
+DenseNet Only:
+        MAE:            0.594
+        Cohen's Kappa:  0.566
+        Accuracy:       0.609
+
+ViT Only:
+        MAE:            0.573
+        Cohen's Kappa:  0.523
+        Accuracy:       0.571
+
+Best of Both (Majority ViT by 74.55%):
+        MAE:            0.201
+        Cohen's Kappa:  0.788
+        Accuracy:       0.810
+
+
+Tooth 31 PS 16 | CL False RA False:
+--------------------------
+DenseNet Only:
+        MAE:            0.748
+        Cohen's Kappa:  0.421
+        Accuracy:       0.504
+
+ViT Only:
+        MAE:            0.717
+        Cohen's Kappa:  0.385
+        Accuracy:       0.477
+
+Best of Both (Majority ViT by 70.16%):
+        MAE:            0.326
+        Cohen's Kappa:  0.659
+        Accuracy:       0.709
+
+
+Tooth 34 PS 16 | CL True RA True:
+--------------------------
+DenseNet Only:
+        MAE:            0.716
+        Cohen's Kappa:  0.443
+        Accuracy:       0.510
+
+ViT Only:
+        MAE:            0.965
+        Cohen's Kappa:  0.241
+        Accuracy:       0.335
+
+Best of Both (Majority ViT by 61.29%):
+        MAE:            0.426
+        Cohen's Kappa:  0.566
+        Accuracy:       0.619
+
+
+Tooth 37 PS 16 | CL False RA False:
+--------------------------
+DenseNet Only:
+        MAE:            0.771
+        Cohen's Kappa:  0.555
+        Accuracy:       0.599
+
+ViT Only:
+        MAE:            0.638
+        Cohen's Kappa:  0.539
+        Accuracy:       0.586
+
+Best of Both (Majority ViT by 73.01%):
+        MAE:            0.213
+        Cohen's Kappa:  0.811
+        Accuracy:       0.830
+
+
+Tooth 31 PS 32 | CL False RA True:
+--------------------------
+DenseNet Only:
+        MAE:            0.694
+        Cohen's Kappa:  0.393
+        Accuracy:       0.481
+
+ViT Only:
+        MAE:            0.841
+        Cohen's Kappa:  0.310
+        Accuracy:       0.415
+
+Best of Both (Majority ViT by 64.73%):
+        MAE:            0.364
+        Cohen's Kappa:  0.608
+        Accuracy:       0.667
+
+
+Tooth 38 PS 32 | CL True RA False:
+--------------------------
+DenseNet Only:
+        MAE:            1.269
+        Cohen's Kappa:  0.377
+        Accuracy:       0.440
+
+ViT Only:
+        MAE:            1.357
+        Cohen's Kappa:  0.216
+        Accuracy:       0.294
+
+Best of Both (Majority ViT by 64.07%):
+        MAE:            0.618
+        Cohen's Kappa:  0.509
+        Accuracy:       0.558
+
+
+Tooth 31 PS 32 | CL True RA True:
+--------------------------
+DenseNet Only:
+        MAE:            0.740
+        Cohen's Kappa:  0.427
+        Accuracy:       0.512
+
+ViT Only:
+        MAE:            0.822
+        Cohen's Kappa:  0.334
+        Accuracy:       0.434
+
+Best of Both (Majority ViT by 69.38%):
+        MAE:            0.368
+        Cohen's Kappa:  0.622
+        Accuracy:       0.678
+
+
+Tooth 33 PS 32 | CL True RA True:
+--------------------------
+DenseNet Only:
+        MAE:            0.726
+        Cohen's Kappa:  0.374
+        Accuracy:       0.463
+
+ViT Only:
+        MAE:            0.836
+        Cohen's Kappa:  0.338
+        Accuracy:       0.431
+
+Best of Both (Majority ViT by 64.06%):
+        MAE:            0.384
+        Cohen's Kappa:  0.610
+        Accuracy:       0.665
+
+
+Tooth 31 PS 32 | CL False RA False:
+--------------------------
+DenseNet Only:
+        MAE:            0.651
+        Cohen's Kappa:  0.472
+        Accuracy:       0.547
+
+ViT Only:
+        MAE:            0.841
+        Cohen's Kappa:  0.343
+        Accuracy:       0.442
+
+Best of Both (Majority ViT by 66.67%):
+        MAE:            0.337
+        Cohen's Kappa:  0.646
+        Accuracy:       0.698
+
+
+Tooth 31 PS 16 | CL True RA True:
+--------------------------
+DenseNet Only:
+        MAE:            0.938
+        Cohen's Kappa:  0.351
+        Accuracy:       0.446
+
+ViT Only:
+        MAE:            0.798
+        Cohen's Kappa:  0.370
+        Accuracy:       0.465
+
+Best of Both (Majority ViT by 73.64%):
+        MAE:            0.419
+        Cohen's Kappa:  0.608
+        Accuracy:       0.667
+
+
+Tooth 31 PS 16 | CL True RA False:
+--------------------------
+DenseNet Only:
+        MAE:            0.543
+        Cohen's Kappa:  0.518
+        Accuracy:       0.589
+
+ViT Only:
+        MAE:            0.698
+        Cohen's Kappa:  0.395
+        Accuracy:       0.484
+
+Best of Both (Majority ViT by 70.54%):
+        MAE:            0.306
+        Cohen's Kappa:  0.686
+        Accuracy:       0.733
+
+
+Tooth 37 PS 16 | CL False RA True:
+--------------------------
+DenseNet Only:
+        MAE:            0.550
+        Cohen's Kappa:  0.600
+        Accuracy:       0.640
+
+ViT Only:
+        MAE:            0.594
+        Cohen's Kappa:  0.525
+        Accuracy:       0.573
+
+Best of Both (Majority ViT by 74.04%):
+        MAE:            0.216
+        Cohen's Kappa:  0.783
+        Accuracy:       0.805
+
+
+Tooth 34 PS 16 | CL False RA True:
+--------------------------
+DenseNet Only:
+        MAE:            1.065
+        Cohen's Kappa:  0.317
+        Accuracy:       0.397
+
+ViT Only:
+        MAE:            0.910
+        Cohen's Kappa:  0.274
+        Accuracy:       0.365
+
+Best of Both (Majority ViT by 70.97%):
+        MAE:            0.497
+        Cohen's Kappa:  0.515
+        Accuracy:       0.574
+
+
+Tooth 33 PS 32 | CL True RA False:
+--------------------------
+DenseNet Only:
+        MAE:            0.687
+        Cohen's Kappa:  0.345
+        Accuracy:       0.438
+
+ViT Only:
+        MAE:            0.833
+        Cohen's Kappa:  0.328
+        Accuracy:       0.423
+
+Best of Both (Majority ViT by 74.73%):
+        MAE:            0.448
+        Cohen's Kappa:  0.536
+        Accuracy:       0.601
+
+
+Tooth 34 PS 32 | CL True RA True:
+--------------------------
+DenseNet Only:
+        MAE:            0.645
+        Cohen's Kappa:  0.465
+        Accuracy:       0.529
+
+ViT Only:
+        MAE:            0.765
+        Cohen's Kappa:  0.362
+        Accuracy:       0.442
+
+Best of Both (Majority ViT by 67.10%):
+        MAE:            0.326
+        Cohen's Kappa:  0.654
+        Accuracy:       0.697
+
+
+Tooth 33 PS 16 | CL False RA False:
+--------------------------
+DenseNet Only:
+        MAE:            0.779
+        Cohen's Kappa:  0.353
+        Accuracy:       0.445
+
+ViT Only:
+        MAE:            0.918
+        Cohen's Kappa:  0.262
+        Accuracy:       0.367
+
+Best of Both (Majority ViT by 72.24%):
+        MAE:            0.516
+        Cohen's Kappa:  0.502
+        Accuracy:       0.573
+
+
+Tooth 31 PS 32 | CL True RA False:
+--------------------------
+DenseNet Only:
+        MAE:            0.845
+        Cohen's Kappa:  0.397
+        Accuracy:       0.481
+
+ViT Only:
+        MAE:            0.826
+        Cohen's Kappa:  0.353
+        Accuracy:       0.450
+
+Best of Both (Majority ViT by 67.83%):
+        MAE:            0.353
+        Cohen's Kappa:  0.668
+        Accuracy:       0.717
+
+
+Tooth 38 PS 16 | CL True RA True:
+--------------------------
+DenseNet Only:
+        MAE:            1.043
+        Cohen's Kappa:  0.383
+        Accuracy:       0.445
+
+ViT Only:
+        MAE:            1.111
+        Cohen's Kappa:  0.291
+        Accuracy:       0.362
+
+Best of Both (Majority ViT by 68.09%):
+        MAE:            0.555
+        Cohen's Kappa:  0.537
+        Accuracy:       0.583
+
+
+Tooth 34 PS 16 | CL False RA False:
+--------------------------
+DenseNet Only:
+        MAE:            0.994
+        Cohen's Kappa:  0.350
+        Accuracy:       0.423
+
+ViT Only:
+        MAE:            0.800
+        Cohen's Kappa:  0.318
+        Accuracy:       0.403
+
+Best of Both (Majority ViT by 68.06%):
+        MAE:            0.413
+        Cohen's Kappa:  0.584
+        Accuracy:       0.635
+
+
+Tooth 33 PS 32 | CL False RA True:
+--------------------------
+DenseNet Only:
+        MAE:            0.712
+        Cohen's Kappa:  0.386
+        Accuracy:       0.473
+
+ViT Only:
+        MAE:            0.847
+        Cohen's Kappa:  0.347
+        Accuracy:       0.438
+
+Best of Both (Majority ViT by 69.40%):
+        MAE:            0.413
+        Cohen's Kappa:  0.602
+        Accuracy:       0.658
+
+
+Tooth 34 PS 32 | CL False RA False:
+--------------------------
+DenseNet Only:
+        MAE:            0.584
+        Cohen's Kappa:  0.441
+        Accuracy:       0.510
+
+ViT Only:
+        MAE:            0.781
+        Cohen's Kappa:  0.384
+        Accuracy:       0.461
+
+Best of Both (Majority ViT by 66.77%):
+        MAE:            0.319
+        Cohen's Kappa:  0.658
+        Accuracy:       0.700
+
+
+Tooth 37 PS 16 | CL True RA False:
+--------------------------
+DenseNet Only:
+        MAE:            0.576
+        Cohen's Kappa:  0.600
+        Accuracy:       0.640
+
+ViT Only:
+        MAE:            0.686
+        Cohen's Kappa:  0.491
+        Accuracy:       0.542
+
+Best of Both (Majority ViT by 70.44%):
+        MAE:            0.211
+        Cohen's Kappa:  0.786
+        Accuracy:       0.807
+
+
+Tooth 37 PS 32 | CL False RA False:
+--------------------------
+DenseNet Only:
+        MAE:            0.820
+        Cohen's Kappa:  0.592
+        Accuracy:       0.632
+
+ViT Only:
+        MAE:            0.596
+        Cohen's Kappa:  0.557
+        Accuracy:       0.602
+
+Best of Both (Majority ViT by 75.32%):
+        MAE:            0.188
+        Cohen's Kappa:  0.814
+        Accuracy:       0.833

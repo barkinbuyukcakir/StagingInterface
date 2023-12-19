@@ -1,6 +1,6 @@
 import multiprocessing as mp
 import subprocess
-from vit_cv2 import CrossValidator
+from aevit_cv2 import CrossValidator
 import argparse
 
 def process_test_results():
@@ -12,11 +12,16 @@ def cross_validate(tooth,gpu,epochs,clahe,randomaffine,patch_size,silent):
     CrossValidator(
         tooth=tooth,
         gpu = gpu,
-        epochs=epochs,
+        vit_epochs=epochs,
+        ae_epochs=80,
         clahe=clahe,
         randomaffine=randomaffine,
         patch_size=patch_size,
-        silent=silent
+        silent=silent,
+        svd=False,
+        layers=12,
+        heads=6,
+        modelType="AE+ViT"
     )
     
 
@@ -28,22 +33,23 @@ if __name__ == "__main__":
     args = parser.parse_args()
     
     procs = []    
-    teeth = [38]
-    patch_sizes = [16,32]
-    aug_clahe = (False,True)
-    aug_ra = (False,True)
+    teeth = [31,33,34,37,38]
+    patch_sizes = [16]
+    aug_clahe = (False,)
+    aug_ra = (False,)
     gpu_track = 0
+    gpus = [0,1,2,3,4]
     ct = 0
     if args.train:
         for ps in patch_sizes:
             for tooth in teeth:
                 for clahe in aug_clahe:
-                    for epochs in [60]:
+                    for epochs in [40]:
                         for ra in aug_ra:
-                            if gpu_track==3:
-                                gpu_track+=1
-                                continue
-                            args_cv = (tooth,gpu_track,epochs,clahe,ra,ps,True,)
+                            # if gpu_track==3:
+                            #     gpu_track+=1
+                            #     continue
+                            args_cv = (tooth,gpus[gpu_track],epochs,clahe,ra,ps,True,)
                             ct+=1
                             p = mp.Process(target = cross_validate,args=args_cv)
                             limit = 0 if ps == 32 else 0
@@ -53,7 +59,7 @@ if __name__ == "__main__":
                             procs.append(p)            
                             p.start()
 
-                            if gpu_track>4:
+                            if gpu_track>len(gpus)-1:
                                 print("Waiting for free gpus")
                                 gpu_track=0
                                 for proc in procs:

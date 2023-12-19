@@ -56,7 +56,7 @@ for target in targets:
     else:
         c = "b"
     plt.scatter(pc_values.loc[indicesToKeep, 'PC1']
-               , pc_values.loc[indicesToKeep, 'PC2'],c=c, s = 40)
+               , pc_values.loc[indicesToKeep, 'PC2'], s = 40)
 
 plt.legend(targets,prop={'size': 10})
 plt.savefig("./03 Reports/PC1vsPC2_16.png")
@@ -77,7 +77,7 @@ for target in targets:
     else:
         c = "b"
     plt.scatter(pc_values.loc[indicesToKeep, 'PC3']
-               , pc_values.loc[indicesToKeep, 'PC4'], c=c, s = 40)
+               , pc_values.loc[indicesToKeep, 'PC4'], s = 40)
 
 plt.legend(targets,prop={'size': 10})
 plt.savefig("./03 Reports/PC3vsPC4_16.png")

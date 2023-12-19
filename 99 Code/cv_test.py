@@ -7,6 +7,7 @@ from torch import zeros,vstack,Tensor,zeros_like
 from torch.nn import Softmax
 from tqdm import tqdm
 import matplotlib.pyplot as plt
+from cv2 import resize
 
 
 class CvTester():
@@ -53,13 +54,14 @@ class CvTester():
 
  
         models = os.listdir('./02 Results/test_results')
-        models = [i for i in models if i.__contains__("1106")]
+        models = [i for i in models if i.__contains__("AE+ViT")]
         pbar = tqdm(models,disable=self.silent)
         for model in pbar:
             model_id =f'{model.split("_")[-2]}_{model.split("_")[-1]}'
             if not createDf:
                 if model_id in df.index.get_level_values(0):
-                    continue         
+                    continue  
+                    # pass       
             path = f"./03 Reports/mean_attention_maps/{model}"
             os.makedirs(path,exist_ok=True)
             folds = [i for i in os.listdir(f'./02 Results/test_results/{model}')]
@@ -73,7 +75,8 @@ class CvTester():
             #Accumulate all images,masks,foci and predictions across folds
             pbar.set_description(f"Testing model {model}")
             df2 = pd.DataFrame(columns=['ModelId','ModelType','PatchSize','Layers','Heads','Tooth','CLAHE','RandomAffine','MeanAccStd','AverageAttentionsPath','Fold','Accuracy','CohenKappa','MAE','MSE',])
-            
+            # if n_folds!= 5:
+            #     continue
             for foldNum, fold in enumerate(folds):
                 with open(f"./02 Results/test_results/{model}/{fold}",'rb') as f:
                     dbase = pickle.load(f)

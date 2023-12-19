@@ -162,7 +162,7 @@ class AttentionDatabase():
         )
 
     @torch.no_grad()
-    def rollout(self,index:int,reduction: str | Callable = "max", discard_ratio:float=0.9,**kwargs:Any) -> Tuple:
+    def rollout(self,index:int,reduction: str | Callable = "mean", discard_ratio:float=0.8,**kwargs:Any) -> Tuple:
         """
         Outputs the attention rollout for a test case.
         Args:
